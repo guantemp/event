@@ -15,10 +15,6 @@
  */
 package event.foxtail.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.IOException;
 import java.util.Date;
 
 /***
@@ -26,8 +22,8 @@ import java.util.Date;
  * @since JDK7.0
  * @version 0.0.1 2015年11月3日
  */
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-public final class StoredEvent {
+//@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+public class StoredEvent {
     private String eventBody;
     //private int version;
     private long eventId;
@@ -95,13 +91,15 @@ public final class StoredEvent {
     public <T extends DomainEvent> T toDomainEvent() {
         Class<T> domainEventClass = null;
         T domainEvent = null;
+        /*
         try {
             domainEventClass = (Class<T>) Class.forName(typeName);
-            ObjectMapper mapper = new ObjectMapper();
+           ObjectMapper mapper = new ObjectMapper();
             domainEvent = mapper.readValue(eventBody, domainEventClass);
         } catch (IOException | ClassNotFoundException e) {
             throw new IllegalStateException("Class load error, because: " + e.getMessage());
         }
+        */
         return domainEvent;
     }
 
