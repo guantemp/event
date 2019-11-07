@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 www.foxtail.cc All Rights Reserved.
+ * Copyright 2019 www.hoprxi.com All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,19 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package event.foxtail.infrastruture.simple;
+package event.hoprxi.infrastruture.simple;
 
-import event.foxtail.domain.model.DomainEvent;
-import event.foxtail.domain.model.DomainEventPublisher;
-import event.foxtail.domain.model.DomainEventSubscriber;
+import event.hoprxi.domain.model.DomainEvent;
+import event.hoprxi.domain.model.DomainEventPublisher;
+import event.hoprxi.domain.model.DomainEventSubscriber;
 
 import java.util.Collection;
 import java.util.List;
 
 /***
- * @author <a href="mailto:myis1000@gmail.com">guan xiangHuan</a>
- * @since JDK7.0
- * @version 0.0.1 2015年10月29日
+ * @author <a href="www.hoprxi.com/authors/guan xiangHuan">guan xiangHuang</a>
+ * @since JDK8.0
+ * @version 0.0.1 2019-10-05
  */
 public final class SimpleDomainEventPublisher implements DomainEventPublisher {
     private static final ThreadLocal<DomainEventPublisher> instance = new ThreadLocal<DomainEventPublisher>() {

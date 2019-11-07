@@ -1,4 +1,4 @@
-package event.foxtail;
+package event.hoprxi;
 
 /**
  * Hello world!

@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 www.foxtail.cc All Rights Reserved.
+ * Copyright 2019 www.hoprxi.com All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package event.foxtail.domain.model;
+package event.hoprxi.domain.model;
 
 import java.util.Collection;
 
 /***
- * @author <a href="mailto:myis1000@gmail.com">guan xiangHuan</a>
- * @since JDK7.0
- * @version 0.0.1 2015年11月3日
+ * @author <a href="www.hoprxi.com/authors/guan xiangHuan">guan xiangHuang</a>
+ * @since JDK8.0
+ * @version 0.0.1 2019-10-05
  */
 public interface StoredEventRepository {
     /**

@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 www.foxtail.cc All Rights Reserved.
+ * Copyright 2019 www.hoprxi.com All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,39 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package event.foxtail.domain.model;
+package event.hoprxi.domain.model;
 
-import java.util.Collection;
+import java.time.LocalDateTime;
 
 /**
- * @author <a href="mailto:myis1000@gmail.com">guan xiangHuan</a>
+ * @author <a href="www.hoprxi.com/authors/guan xiangHuan">guan xiangHuang</a>
  * @version 0.0.1 2019-04-19
  * @since JDK8.0
  */
-public interface DomainEventPublisher {
+public interface DomainEvent {
+    /**
+     * @return
+     */
+    LocalDateTime occurredOn();
 
     /**
-     * @param event
+     * @return
      */
-    <T> void publish(T event);
-
-    /**
-     * @param events
-     */
-    void publishAll(Collection<DomainEvent> events);
-
-    /**
-     *
-     */
-    void reset();
-
-    /**
-     * @param domainEventSubscriber
-     */
-    <T> void subscribe(T domainEventSubscriber);
-
-    /**
-     * @param domainEventSubscriber
-     */
-    <T> void unsubscribe(T domainEventSubscriber);
+    int version();
 }
