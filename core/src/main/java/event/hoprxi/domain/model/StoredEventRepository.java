@@ -15,7 +15,6 @@
  */
 package event.hoprxi.domain.model;
 
-import java.util.Collection;
 
 /***
  * @author <a href="www.hoprxi.com/authors/guan xiangHuan">guan xiangHuang</a>
@@ -26,28 +25,10 @@ public interface StoredEventRepository {
     /**
      * @return
      */
-    long countStoredEvent();
-
-    /**
-     * @return
-     */
     long nextIdentity();
 
     /**
      * @param domainEvent
      */
     void save(DomainEvent domainEvent);
-
-    /**
-     * @param low
-     * @param high
-     * @return
-     */
-    Collection<StoredEvent> storedEventsBetween(long low, long high);
-
-    /**
-     * @param eventId
-     * @return
-     */
-    Collection<StoredEvent> storedEventsSince(long eventId);
 }

@@ -31,5 +31,5 @@ public interface DomainEventSubscriber<T extends DomainEvent> {
     /**
      * @return
      */
-    public Class<T> subscribedToEventType();
+    Class<T> subscribedToEventType();
 }

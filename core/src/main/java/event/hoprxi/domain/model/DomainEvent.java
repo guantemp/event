@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 www.hoprxi.com All Rights Reserved.
+ * Copyright 2023 www.hoprxi.com All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,19 +19,14 @@ import java.time.LocalDateTime;
 
 /**
  * @author <a href="www.hoprxi.com/authors/guan xiangHuan">guan xiangHuang</a>
- * @version 0.0.2 2020-12-18
+ * @version 0.0.3 2023-01-08
  * @since JDK8.0
  */
 public interface DomainEvent {
-    /**
-     * @return
-     */
+
     LocalDateTime occurredOn();
 
-    /**
-     * @return
-     */
-    default int version(){
+    default int version() {
         return 1;
-    };
+    }
 }

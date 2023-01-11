@@ -15,7 +15,8 @@
  */
 package event.hoprxi.domain.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.StringJoiner;
 
 /***
  * @author <a href="www.hoprxi.com/authors/guan xiangHuan">guan xiangHuang</a>
@@ -23,68 +24,47 @@ import java.util.Date;
  * @version 0.0.1 2019-10-05
  */
 //@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-public class StoredEvent {
-    private String eventBody;
+public final class StoredEvent {
+    private DomainEvent eventBody;
     //private int version;
-    private long eventId;
-    private Date occurredOn;
-    private String typeName;
+    private long id;
+    private LocalDateTime occurredOn;
+    private String eventType;
 
-    public StoredEvent(long eventId, String typeName, String eventBody) {
-        this.occurredOn = new Date();
-        this.setEventId(eventId);
-        this.setTypeName(typeName);
+    public StoredEvent(long id, String eventType, DomainEvent eventBody) {
+        this.setId(id);
+        this.setEventType(eventType);
         this.setEventBody(eventBody);
+        this.occurredOn = LocalDateTime.now();
+        ;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        StoredEvent other = (StoredEvent) obj;
-        if (eventId != other.eventId)
-            return false;
-        return true;
-    }
-
-    public String eventBody() {
+    public DomainEvent eventBody() {
         return eventBody;
     }
 
-    public long eventId() {
-        return eventId;
+    public long id() {
+        return id;
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + (int) (eventId ^ (eventId >>> 32));
-        return result;
-    }
-
-    public Date occurredOn() {
+    public LocalDateTime occurredOn() {
         return occurredOn;
     }
 
-    protected void setEventBody(String eventBody) {
+    private void setEventBody(DomainEvent eventBody) {
         this.eventBody = eventBody;
     }
 
-    protected void setEventId(long eventId) {
-        this.eventId = eventId;
+    private void setId(long id) {
+        this.id = id;
     }
 
-    protected void setTypeName(String typeName) {
-        if (typeName == null)
+    private void setEventType(String eventType) {
+        if (eventType == null)
             throw new IllegalArgumentException("The event type name is required.");
-        if (typeName.length() < 1 || typeName.length() > 100)
-            throw new IllegalArgumentException("The event type name must be 100 characters or less.");
-        this.typeName = typeName;
+        if (eventType.length() < 1 || eventType.length() > 94)
+            throw new IllegalArgumentException("The event type name must be 94 characters or less.");
+        this.eventType = eventType;
     }
 
     @SuppressWarnings("unchecked")
@@ -105,11 +85,30 @@ public class StoredEvent {
 
     @Override
     public String toString() {
-        return "StoredEvent [eventBody=" + eventBody + ", eventId=" + eventId + ", occurredOn=" + occurredOn
-                + ", typeName=" + typeName + "]";
+        return new StringJoiner(", ", StoredEvent.class.getSimpleName() + "[", "]")
+                .add("eventBody='" + eventBody + "'")
+                .add("id=" + id)
+                .add("occurredOn=" + occurredOn)
+                .add("typeName='" + eventType + "'")
+                .toString();
     }
 
-    public String typeName() {
-        return typeName;
+    public String eventType() {
+        return eventType;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof StoredEvent)) return false;
+
+        StoredEvent that = (StoredEvent) o;
+
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (id ^ (id >>> 32));
     }
 }
