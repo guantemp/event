@@ -1,0 +1,9 @@
+event\hoprxi\infrastruture\simple\SimpleDomainEventPublisher$1.class
+event\hoprxi\infrastruture\simple\SimpleDomainEventPublisher.class
+event\hoprxi\App.class
+event\hoprxi\application\Bootstrap.class
+event\hoprxi\domain\model\DomainEventPublisher.class
+event\hoprxi\domain\model\DomainEventSubscriber.class
+event\hoprxi\domain\model\StoredEvent.class
+event\hoprxi\domain\model\StoredEventRepository.class
+event\hoprxi\domain\model\DomainEvent.class
