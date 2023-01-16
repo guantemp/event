@@ -18,12 +18,11 @@ public class StoredEventHandler implements Handler {
     public void onEvent(DomainEventWrap domainEventWrap, long l, boolean b) throws Exception {
         DomainEvent event = domainEventWrap.getEvent();
         repository.save(event);
-        System.out.println(l);
-        System.out.println(b);
     }
 
     @Override
     public void onEvent(DomainEventWrap domainEventWrap) throws Exception {
-
+        DomainEvent event = domainEventWrap.getEvent();
+        repository.save(event);
     }
 }

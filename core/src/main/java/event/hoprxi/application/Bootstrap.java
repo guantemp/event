@@ -26,7 +26,7 @@ public class Bootstrap {
     public void start() throws TimeoutException, NoSuchAlgorithmException {
         final Disruptor<DomainEventWrap> disruptor = new Disruptor<>(
                 domainEventWrapFactory,
-                16,
+                512,
                 Executors.defaultThreadFactory(),
                 ProducerType.SINGLE,
                 new YieldingWaitStrategy()
@@ -36,7 +36,7 @@ public class Bootstrap {
         RingBuffer<DomainEventWrap> ringBuffer = disruptor.getRingBuffer();
         DisruptorPublisher publisher = new DisruptorPublisher(ringBuffer);
         SecureRandom r = SecureRandom.getInstance("SHA1PRNG");
-        for (int i = 0; i < 128; i++) {
+        for (int i = 0; i < 256; i++) {
             publisher.publish(new TestedDomainEvent(r.nextLong(), "我失策失策沙发上"));
         }
         //publisher.publish(new TestedDomainEvent(r.nextLong(), "使得该发生第三方"));
