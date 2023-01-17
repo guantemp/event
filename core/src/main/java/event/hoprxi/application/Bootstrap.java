@@ -2,7 +2,6 @@ package event.hoprxi.application;
 
 import com.lmax.disruptor.EventFactory;
 import com.lmax.disruptor.RingBuffer;
-import com.lmax.disruptor.TimeoutException;
 import com.lmax.disruptor.YieldingWaitStrategy;
 import com.lmax.disruptor.dsl.Disruptor;
 import com.lmax.disruptor.dsl.ProducerType;
@@ -22,24 +21,28 @@ import java.util.concurrent.Executors;
  */
 public class Bootstrap {
     private static final EventFactory<DomainEventWrap> domainEventWrapFactory = new DomainEventWrapFactory();
+    private static final Disruptor<DomainEventWrap> disruptor;
 
-    public void start() throws TimeoutException, NoSuchAlgorithmException {
-        final Disruptor<DomainEventWrap> disruptor = new Disruptor<>(
+    static {
+        disruptor = new Disruptor<>(
                 domainEventWrapFactory,
-                512,
+                128,
                 Executors.defaultThreadFactory(),
-                ProducerType.SINGLE,
+                ProducerType.MULTI,
                 new YieldingWaitStrategy()
         );
         disruptor.handleEventsWith(new StoredEventHandler());
         disruptor.start();
+
+    }
+
+    public void start() throws NoSuchAlgorithmException {
+
         RingBuffer<DomainEventWrap> ringBuffer = disruptor.getRingBuffer();
         DisruptorPublisher publisher = new DisruptorPublisher(ringBuffer);
         SecureRandom r = SecureRandom.getInstance("SHA1PRNG");
-        for (int i = 0; i < 256; i++) {
+        for (int i = 0; i < 5; i++) {
             publisher.publish(new TestedDomainEvent(r.nextLong(), "我失策失策沙发上"));
         }
-        //publisher.publish(new TestedDomainEvent(r.nextLong(), "使得该发生第三方"));
-        disruptor.shutdown();
     }
 }

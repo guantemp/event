@@ -66,7 +66,7 @@ public class AppTest {
         System.out.println(output);
     }
 
-    @Test(invocationCount = 12, priority = 2, threadPoolSize = 1)
+    @Test(invocationCount = 10, priority = 2, threadPoolSize = 1)
     public void disruptor() throws NoSuchAlgorithmException, TimeoutException {
         Bootstrap strap = new Bootstrap();
         strap.start();
