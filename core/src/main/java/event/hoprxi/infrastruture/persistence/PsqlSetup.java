@@ -18,8 +18,8 @@ package event.hoprxi.infrastruture.persistence;
 
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
-import salt.hoprxi.crypto.application.PasswordService;
-import salt.hoprxi.utils.ResourceWherePath;
+import salt.hoprxi.crypto.PasswordService;
+import salt.hoprxi.utils.ResourceWhere;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -60,8 +60,8 @@ public class PsqlSetup {
     }
 
     public static void setup(String user, String password, String databaseName) throws SQLException, IOException, URISyntaxException {
-        String recommendUserName = PasswordService.generateVeryStrongPassword();
-        String recommendUserPassword = PasswordService.generateVeryStrongPassword();
+        String recommendUserName = PasswordService.nextStrongPasswd();
+        String recommendUserPassword = PasswordService.nextStrongPasswd();
         System.out.println(recommendUserName + " : " + recommendUserPassword);
        /*
         List<? extends Config> writes = config.getConfigList("write");
@@ -85,7 +85,7 @@ public class PsqlSetup {
         */
         Pattern pattern = Pattern.compile("user");
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
-        System.out.println(ResourceWherePath.toUrl("event.conf"));
+        System.out.println(ResourceWhere.toUrl("event.conf"));
         Stream<String> lines = Files.lines(Paths.get(loader.getResource("event.conf").toURI()));
         lines.forEach(line -> {
             Matcher matcher = pattern.matcher(line);
